@@ -230,8 +230,7 @@ public abstract class Server extends AbstractVerticle {
           Controller.renderJson(event, new JsonObject().put("test", "ok").put("nodeId", nodeId));
         } else {
           log.warn("Liveness check failed: node " + nodeId + " not found in cluster nodes");
-          event.response().setStatusCode(500);
-          Controller.renderJson(event, new JsonObject()
+          Controller.renderError(event, new JsonObject()
             .put("test", "ko")
             .put("error", "Node not registered in cluster")
 			.put("nodeId", nodeId));
