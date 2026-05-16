@@ -105,7 +105,7 @@ public class I18n {
 			if (args.length > 0) {
 				try {
 					for (int i = 0; i < args.length; i++) {
-						text = text.replaceAll("\\{" + i + "\\}", args[i]);
+						text = text.replaceAll("\\{" + i + "\\}", args[i] != null ? args[i] : "");
 					}
 				} catch (RuntimeException e) {
 					log.error("Error replacing i18n variable", e);
