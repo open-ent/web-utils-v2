@@ -401,7 +401,13 @@ public class Renders {
 		if (isNotEmpty(ip)) {
 			return ip;
 		}
-		return request.remoteAddress().host();
+		// remoteAddress() est toujours null sur une requête JSON synthétique construite pour un appel
+		// event-bus inter-module (org.entcore.common.http.request.JsonHttpServerRequest#remoteAddress,
+		// pattern utilisé dans de nombreux modules pour transporter une "fausse" requête via l'event-bus).
+		// Garde défensive : ne change jamais le comportement d'une vraie requête HTTP (remoteAddress()
+		// y est toujours non nul), évite une NullPointerException sinon systématique pour ce cas.
+		final io.vertx.core.net.SocketAddress remoteAddress = request.remoteAddress();
+		return remoteAddress != null ? remoteAddress.host() : "";
 	}
 
 	public void addHookRenderProcess(HookProcess hookRenderProcess) {
