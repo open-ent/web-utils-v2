@@ -71,7 +71,20 @@ public class StaticResource {
 			request.response().setStatusCode(304).end();
 		} else {
 			request.response().sendFile(ressourcePath, ar -> {
-				if (ar.failed() && !request.response().ended()) {
+				if (ar.succeeded()) {
+					return;
+				}
+				final HttpServerResponse response = request.response();
+				if (response.ended()) {
+					return;
+				}
+				if (response.headWritten()) {
+					// The transfer failed after the head was flushed (client gone mid-download,
+					// truncated file...). The status can no longer be rewritten : setting it
+					// would throw "Response head already sent" from inside this callback, which
+					// surfaces as an unhandled exception. Closing is all that is left.
+					response.reset();
+				} else {
 					Renders.notFound(request);
 				}
 			});
