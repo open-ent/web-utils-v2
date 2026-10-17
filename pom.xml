@@ -23,13 +23,13 @@
     </repositories>
 
     <properties>
-        <mustache.version>1.15</mustache.version>
-        <jodaTimeVersion>2.12.5</jodaTimeVersion>
+        <mustache.version>1.16</mustache.version>
+        <jodaTimeVersion>2.15.0</jodaTimeVersion>
         <eventbusWrapperVersion>1.1.0</eventbusWrapperVersion>
         <javaHtmlSanitizerVersion>20220608.1</javaHtmlSanitizerVersion>
         <jacksonDatabindVersion>2.15.2</jacksonDatabindVersion>
-        <commonsTextVersion>1.11.0</commonsTextVersion>
-        <commonsCodecVersion>1.16.0</commonsCodecVersion>
+        <commonsTextVersion>1.15.0</commonsTextVersion>
+        <commonsCodecVersion>1.23.0</commonsCodecVersion>
         <micrometerPrometheusVersion>1.1.0</micrometerPrometheusVersion>
         <xss-utils.version>1.1.1</xss-utils.version>
     </properties>
